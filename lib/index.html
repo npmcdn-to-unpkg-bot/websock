@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2 style="color:red;">I am red</h2>
+  <h2 style="color:blue;">I am blue</h2>
+  <div id="content"></div>
+
+  <script type="text/javascript">
+  var content = document.getElementById('content');
+  var socket = new WebSocket('ws://localhost:3000/chat');
+  socket.onopen = function () {
+    console.log('message')
+    socket.send('hello from the client');
+  };
+
+  socket.onmessage = function (message) {
+    console.log(message)
+    content.innerHTML += message.data +'<br />';
+  };
+
+  socket.onerror = function (error) {
+    console.log('WebSocket error: ' + error);
+  };
+  </script>
+</body>
+</html>
