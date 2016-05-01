@@ -1,0 +1,212 @@
+<div class="content container-fluid bootstrap snippets" ng-init="slider()">
+  <div class="row row-broken">
+    <div class="col-sm-3 col-xs-12">
+      <div class="col-inside-lg decor-default chat chat-room" style="overflow: hidden; outline: none;" tabindex="5000">
+        <div class="chat chat-users">
+          <h6>Online</h6>
+          <div class="user" ng-repeat="user in users track by $index">
+            <div class="avatar">
+              <img src="{{user.link}}">
+              <div class="status online"></div>
+            </div>
+            <div class="name">{{user.id}}</div>
+            <div class="mood">.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-xs-12 chat chat-box" style="overflow: hidden; outline: none;" tabindex="5001">
+      <div class="col-inside-lg decor-default">
+        <div class="chat-body">
+          <h6>Mini Chat</h6>
+          <div ng-repeat="msg in msgs track by $index">
+            <div class="answer left" ng-if="!msg.right">
+              <div class="avatar">
+                <img src="{{msg.user.link}}">
+                <div class="status offline"></div>
+              </div>
+              <div class="name">{{msg.id}}</div>
+              <div class="text">
+                {{msg.text}}
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+
+            <div class="answer right" ng-if="msg.right">
+              <div class="avatar">
+                <img src="{{msg.user.link}}" alt="User name">
+                <div class="status offline"></div>
+              </div>
+              <div class="name">You</div>
+              <div class="text">
+                {{msg.text}}
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+          </div>
+          <div class="answer-add">
+            <input placeholder="Write a message">
+            <span class="answer-btn answer-btn-1"></span>
+            <span class="answer-btn answer-btn-2"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-xs-12 message-box">
+      <form class="form-horizontal add" ng-submit="send(message); message = ''">
+        <div class="form-group">
+          <div class="col-sm-11">
+            <input type="text" class="form-control" placeholder="Message" ng-model="message">
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 
+<div class="content container-fluid bootstrap snippets" ng-init="slider()">
+      <div class="row row-broken">
+        <div class="col-sm-3 col-xs-12">
+          <div class="col-inside-lg decor-default chat chat-room" style="overflow: hidden; outline: none;" tabindex="5000">
+            <div class="chat-users">
+              <h6>Online</h6>
+                <div ng-if="users">
+                    <div class="user" ng-repeat="user in users">
+                      <div class="avatar">
+                        <img src="{{user.link}}">
+                        <div class="status online"></div>
+                      </div>
+                      <div class="name">{{user.id}}</div>
+                      <div class="mood">.</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
+          <div class="col-inside-lg decor-default">
+            <div class="chat-body">
+              <h6>Mini Chat</h6>
+              <div class="answer left">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                  <div class="status offline"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
+                  <div class="status offline"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer left">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                  <div class="status online"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  ...
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
+                  <div class="status busy"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  It is a long established fact that a reader will be. Thanks Mate!
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                  <div class="status off"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  It is a long established fact that a reader will be. Thanks Mate!
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer left">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
+                  <div class="status offline"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                  <div class="status offline"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer left">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
+                  <div class="status online"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  ...
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                  <div class="status busy"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  It is a long established fact that a reader will be. Thanks Mate!
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer right">
+                <div class="avatar">
+                  <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
+                  <div class="status off"></div>
+                </div>
+                <div class="name">Alexander Herthic</div>
+                <div class="text">
+                  It is a long established fact that a reader will be. Thanks Mate!
+                </div>
+                <div class="time">5 min ago</div>
+              </div>
+              <div class="answer-add">
+                <input placeholder="Write a message">
+                <span class="answer-btn answer-btn-1"></span>
+                <span class="answer-btn answer-btn-2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
