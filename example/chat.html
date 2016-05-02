@@ -23,25 +23,25 @@
             <div class="answer left" ng-if="!msg.right">
               <div class="avatar">
                 <img src="{{msg.user.link}}">
-                <div class="status offline"></div>
+                <div class="status online"></div>
               </div>
               <div class="name">{{msg.id}}</div>
               <div class="text">
                 {{msg.text}}
               </div>
-              <div class="time">5 min ago</div>
+              <div class="time">{{msg.date | date:'medium'}}</div>
             </div>
 
             <div class="answer right" ng-if="msg.right">
               <div class="avatar">
                 <img src="{{msg.user.link}}" alt="User name">
-                <div class="status offline"></div>
+                <div class="status online"></div>
               </div>
               <div class="name">You</div>
               <div class="text">
                 {{msg.text}}
               </div>
-              <div class="time">5 min ago</div>
+              <div class="time">{{msg.date | date:'medium'}}</div>
             </div>
           </div>
           <div class="answer-add">
