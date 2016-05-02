@@ -13,30 +13,30 @@ angular.module('myApp', [
   })
   .state('chat', {
     url: '/chat',
-    templateUrl: 'chat.html'
+    templateUrl: 'chat.html',
+    controller: SubController
   })
   .state('name', {
     url: '/name',
-    templateUrl: 'choose-name.html'
+    templateUrl: 'choose-name.html',
+    controller: SubController
   })
 
   $urlRouterProvider.otherwise('/main')
 })
 .controller('MainController', MainController)
-.filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  };
-});
+.controller('SubController', SubController)
 
-function MainController ($scope, $state, toastr) {
-  var clientID;
-  var socket;
-  $scope.msgs =[];
-  if (socket === undefined) {
-    $state.go('host');
+function SubController ($rootScope, $state) {
+  if ($rootScope.socket === undefined) {
+    setTimeout(()=>{$state.go('host')},0);
   };
-  
+}
+
+function MainController ($rootScope, $scope, $state, toastr) {
+  var clientID;
+  $rootScope.socket;
+  $scope.msgs =[];
 
   $scope.slider = function (argument) {
     $(function(){
@@ -77,7 +77,7 @@ function MainController ($scope, $state, toastr) {
       .replace('{{port}}', port || 3000);
 
     try {
-      socket = new WebSocket(url);
+      $rootScope.socket = new WebSocket(url);
       toastr.success('Connected');
       $state.go('name');
     } catch (e) {
@@ -86,7 +86,7 @@ function MainController ($scope, $state, toastr) {
       return ;
     }
 
-    socket.onopen = function () {
+    $rootScope.socket.onopen = function () {
       console.log('socket is opened');
 
       var msg = {
@@ -96,7 +96,7 @@ function MainController ($scope, $state, toastr) {
       socket.send(JSON.stringify(msg));
     };
 
-    socket.onmessage = function(event) {
+    $rootScope.socket.onmessage = function(event) {
       var msg = JSON.parse(event.data);
       var time = new Date(msg.date);
       var timeStr = time.toLocaleTimeString();
@@ -140,11 +140,11 @@ function MainController ($scope, $state, toastr) {
       }
     }
 
-    socket.onerror = function (error) {
+    $rootScope.socket.onerror = function (error) {
       console.log('WebSocket error: ' + error);
     };
 
-    socket.onclose = function (argument) {
+    $rootScope.socket.onclose = function (argument) {
       console.log('socket is closed');
     }
 
@@ -159,7 +159,7 @@ function MainController ($scope, $state, toastr) {
       };
       console.log(msg);
       // Send the msg object as a JSON-formatted string.
-      socket.send(JSON.stringify(msg));
+      $rootScope.socket.send(JSON.stringify(msg));
     }
   }
 
@@ -169,7 +169,7 @@ function MainController ($scope, $state, toastr) {
       id: name,
       date: Date.now()
     };
-    socket.send(JSON.stringify(msg));
+    $rootScope.socket.send(JSON.stringify(msg));
   }
 
   // $scope.connect();
