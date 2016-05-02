@@ -19,30 +19,13 @@ var ws = new WebSocket({http: server});
 
 ws
   .on('open', function (socket) {
-    // var id = socket.remoteAddress +':'+ socket.remotePort;
-    // socket.WebSocketId = id;
-    // socketPool[id] = {socket};
+    
   })
   .on('text', function (msg, socket) {
     msg = JSON.parse(msg);
     switch(msg.type) {
       case 'register':
-        socketPool[msg.id] = {socket};
-        notify(socket, makeMessage({
-          id: msg.id, 
-          type: 'register',
-        }));
-        notifyAll(makeMessage({
-          id: msg.id, 
-          type: 'system',
-          text: msg.id + ' has joined' 
-        }));
-        console.log(Object.keys(socketPool));
-        notifyAll(makeMessage({
-          type: 'userlist',
-          id: msg.id,
-          data: Object.keys(socketPool)
-        }));
+        register(socket, msg);
         break;
       case "message":
         notifyAll(makeMessage({
@@ -73,8 +56,29 @@ ws
     }));
   })
 
-function register (argument) {
-  // body...
+function register (socket, msg) {
+  if (socketPool[msg.id]) {
+    notify(socket, makeMessage({
+      id: msg.id, 
+      type: 'rejectusername',
+    }));
+  } else {
+    socketPool[msg.id] = {socket};
+    notify(socket, makeMessage({
+      id: msg.id, 
+      type: 'register',
+    }));
+    notifyAll(makeMessage({
+      id: msg.id, 
+      type: 'system',
+      text: msg.id + ' has joined' 
+    }));
+    notifyAll(makeMessage({
+      type: 'userlist',
+      id: msg.id,
+      data: Object.keys(socketPool)
+    }));
+  }
 }
 
 function makeMessage (options) {

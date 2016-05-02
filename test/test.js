@@ -3,7 +3,7 @@
 const assert = require('assert');
 const http = require('http');
 const wesockFrame = require('../lib/frame');
-var server = require('../lib/server');
+// var server = require('../lib/server');
 
 const msg = 'Hello world';
 const options = {
