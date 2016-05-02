@@ -55,7 +55,6 @@ gulp.task('web', function() {
     "example/*.html"
     ]) 
     .on('change', function (argument) {
-      console.log('here');
       browserSync.reload({ stream: true })
     });
 });

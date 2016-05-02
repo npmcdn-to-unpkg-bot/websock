@@ -22,7 +22,7 @@ angular.module('myApp', [
     controller: SubController
   })
 
-  $urlRouterProvider.otherwise('/main')
+  $urlRouterProvider.otherwise('/host')
 })
 .controller('MainController', MainController)
 .controller('SubController', SubController)

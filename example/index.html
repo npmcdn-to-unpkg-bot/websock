@@ -11,7 +11,7 @@
     margin: auto;
   }
 
-  form {
+  .main-form form {
     width: 400px !important;
     margin: auto;
   }
@@ -24,7 +24,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100%;
+    min-height: 600px;
     opacity: 1;
   }
   .fade.ng-enter,
@@ -307,8 +307,6 @@
 </head>
 <body ng-controller="MainController">
   <div class="container">
-    <a ui-sref="host">main</a>
-    <a ui-sref="chat">chat</a>
     <div ui-view class="fade"></div>
   </div>
 
