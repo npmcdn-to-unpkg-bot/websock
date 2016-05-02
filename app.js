@@ -93,7 +93,7 @@ function MainController ($rootScope, $scope, $state, toastr) {
         type: 'userlist',
         date: Date.now()
       };
-      socket.send(JSON.stringify(msg));
+      $rootScope.socket.send(JSON.stringify(msg));
     };
 
     $rootScope.socket.onmessage = function(event) {
@@ -124,6 +124,7 @@ function MainController ($rootScope, $scope, $state, toastr) {
         break;
         case "rejectusername":
         toastr.error('This name has been taken! Please choose another one');
+        setTimeout(()=>{$state.go('name')},0);
         break;
         case "userlist":
         $scope.$apply(function() {
