@@ -11,7 +11,7 @@ var server = http.createServer(function(request, response) {
   response.writeHead(404);
   response.end();
 });
-server.listen(3000, function() {
+server.listen(80, function() {
   console.log((new Date()) + ' Server is listening on port 3000');
 });
 
@@ -19,7 +19,7 @@ var ws = new WebSocket({http: server});
 
 ws
   .on('open', function (socket) {
-    
+
   })
   .on('text', function (msg, socket) {
     msg = JSON.parse(msg);
@@ -45,14 +45,14 @@ ws
   .on('close', function (socket) {
     var index;
     for (var key in socketPool) {
-      if (socketPool[key] === socket) {
+      if (socketPool[key].socket === socket) {
         index  = key;
       };
     };
     notifyAll(makeMessage({
       id: index, 
       type: 'system',
-      text: index+ ' has left' 
+      text: index + ' has left' 
     }));
   })
 
