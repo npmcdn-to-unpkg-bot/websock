@@ -7,10 +7,10 @@ angular.module('myApp', [
 .config(function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-  .state('host', {
-    url: '/',
-    templateUrl: 'choose-host.html'
-  })
+  // .state('host', {
+  //   url: '/',
+  //   templateUrl: 'choose-host.html'
+  // })
   .state('chat', {
     url: '/chat',
     templateUrl: 'chat.html',
@@ -22,14 +22,14 @@ angular.module('myApp', [
     controller: SubController
   })
 
-  $urlRouterProvider.otherwise('/')
+  $urlRouterProvider.otherwise('/name')
 })
 .controller('MainController', MainController)
 .controller('SubController', SubController)
 
 function SubController ($rootScope, $state) {
   if ($rootScope.socket === undefined) {
-    setTimeout(()=>{$state.go('host')},0);
+    setTimeout(()=>{$state.go('name')},0);
   };
 }
 
@@ -72,9 +72,9 @@ function MainController ($rootScope, $scope, $state, toastr) {
   $scope.connect = function (ip, port) {
     var msgs = $scope.msgs;
     $scope.users = {};
-    var url = 'ws://{{ip}}:{{port}}/'
-      .replace('{{ip}}', ip || 'localhost')
-      .replace('{{port}}', port || 3000);
+    var url = 'ws://54.88.226.182:80/'
+      // .replace('{{ip}}', ip || 'localhost')
+      // .replace('{{port}}', port || 3000);
 
     try {
       $rootScope.socket = new WebSocket(url);
@@ -143,7 +143,7 @@ function MainController ($rootScope, $scope, $state, toastr) {
 
     $rootScope.socket.onerror = function (error) {
       console.log('WebSocket error: ' + error);
-      setTimeout(()=>{$state.go('host')},0);
+      setTimeout(()=>{$state.go('name')},0);
     };
 
     $rootScope.socket.onclose = function (argument) {
