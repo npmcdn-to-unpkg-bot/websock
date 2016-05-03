@@ -11,8 +11,9 @@ var server = http.createServer(function(request, response) {
   response.writeHead(404);
   response.end();
 });
+
 server.listen(80, function() {
-  console.log((new Date()) + ' Server is listening on port 3000');
+  console.log((new Date()) + ' Server is listening on port 80');
 });
 
 var ws = new WebSocket({http: server});
