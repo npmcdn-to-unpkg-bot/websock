@@ -78,8 +78,6 @@ function MainController ($rootScope, $scope, $state, toastr) {
 
     try {
       $rootScope.socket = new WebSocket(url);
-      toastr.success('Connected');
-      $state.go('name');
     } catch (e) {
       console.log(e);
       toastr.error('Seems like you are connecting to a wrong host', 'Connection error');
@@ -87,6 +85,8 @@ function MainController ($rootScope, $scope, $state, toastr) {
     }
 
     $rootScope.socket.onopen = function () {
+      toastr.success('Connected');
+      $state.go('name');
       console.log('socket is opened');
 
       var msg = {
@@ -143,6 +143,7 @@ function MainController ($rootScope, $scope, $state, toastr) {
 
     $rootScope.socket.onerror = function (error) {
       console.log('WebSocket error: ' + error);
+      setTimeout(()=>{$state.go('host')},0);
     };
 
     $rootScope.socket.onclose = function (argument) {
