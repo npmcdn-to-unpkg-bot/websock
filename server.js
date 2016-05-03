@@ -50,7 +50,7 @@ ws
         index  = key;
       };
     };
-    delete socketPool[key];
+    delete socketPool[index];
     notifyAll(makeMessage({
       id: index, 
       type: 'system',
