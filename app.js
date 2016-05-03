@@ -72,7 +72,7 @@ function MainController ($rootScope, $scope, $state, toastr) {
   $scope.connect = function (ip, port) {
     var msgs = $scope.msgs;
     $scope.users = {};
-    var url = 'ws://54.88.226.182:80/'
+    var url = 'ws://54.88.226.182'
       // .replace('{{ip}}', ip || 'localhost')
       // .replace('{{port}}', port || 3000);
 
@@ -174,5 +174,5 @@ function MainController ($rootScope, $scope, $state, toastr) {
     $rootScope.socket.send(JSON.stringify(msg));
   }
 
-  // $scope.connect();
+  $scope.connect();
 }
