@@ -1,18 +1,58 @@
 # websock
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+<!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] -->
 
-## Installation
 
-```
-  npm install --save websock
-```
+This library runs on nodejs engine, if you don't have it installed, please visit [node.js](https://nodejs.org/).
 
 ## Usage
 
 ```js
-var websock = require('websock');
+'use strict';
+
+var http = require('http');
+var WebSocket = require('../lib/websocket');
+
+// Create your own server
+var server = http.createServer(function(request, response) {
+  console.log((new Date()) + ' Received request for ' + request.url);
+  response.writeHead(404);
+  response.end();
+});
+
+server.listen(80, function() {
+  console.log((new Date()) + ' Server is listening on port 80');
+});
+
+// Attached the server to websocket
+var ws = new WebSocket({http: server});
+
+ws
+  .on('open', function (socket) {
+    // This is called after connection has been established
+  })
+  .on('text', function (msg, socket) {
+    // Handle text message here
+  })
+  .on('binary', function (msg, socket) {
+    // Handle binary message here
+  })
+  .on('close', function (socket) {
+    // Handle closing connection here
+  })
 ```
+
+## Run demo
+
+Go to the library page. And run command `npm install` to install all dependencies and and then run `npm install -g gulp` to install Gulp task runner. 
+
+Modify `HOST` at line 3 example/app.js to your localhost (DO NOT USE PORT 3000, it is for the website), example 
+
+```js
+  const HOST = 'ws://localhost:9000';
+```
+
+Run `gulp serve` to start serve, and open another terminal and run `gulp web` to start the web.
 
 ## Getting To Know Yeoman
 

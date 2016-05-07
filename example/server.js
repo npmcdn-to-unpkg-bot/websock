@@ -2,9 +2,9 @@
 
 var http = require('http');
 var WebSocket = require('../lib/websocket');
-const chalk = require('chalk')
 
 var socketPool = {};
+const PORT = 9000;
 
 var server = http.createServer(function(request, response) {
   console.log((new Date()) + ' Received request for ' + request.url);
@@ -12,8 +12,8 @@ var server = http.createServer(function(request, response) {
   response.end();
 });
 
-server.listen(80, function() {
-  console.log((new Date()) + ' Server is listening on port 80');
+server.listen(PORT, function() {
+  console.log((new Date()) + ' Server is listening on port ' + PORT);
 });
 
 var ws = new WebSocket({http: server});
